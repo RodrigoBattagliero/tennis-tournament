@@ -30,7 +30,10 @@ class TournamentMapper
     {
         $entityTournament = new EntityTournament();
         $entityTournament->setName($valueObjectTournament->getName());
-        $entityTournament->setWinner($valueObjectTournament->getWinner());
+        $entityTournament->setType($valueObjectTournament->getType());
+        $entityTournament->setWinner(
+            $this->playerMapper->fromValueObjectToEntity($valueObjectTournament->getWinner())
+        );
         foreach ($valueObjectTournament->getPlayers() as $valueObjectPlayer) {
             $entityTournament->addPlayer(
                 $this->playerMapper->fromValueObjectToEntity($valueObjectPlayer)

@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TournamentRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Tournament
 {
     #[ORM\Id]
@@ -21,7 +22,7 @@ class Tournament
     /**
      * @var Collection<int, Player>
      */
-    #[ORM\ManyToMany(targetEntity: Player::class, inversedBy: 'tournaments')]
+    #[ORM\ManyToMany(targetEntity: Player::class, inversedBy: 'tournaments', cascade: ['persist', 'remove'])]
     private Collection $players;
 
     #[ORM\Column]
@@ -30,9 +31,18 @@ class Tournament
     #[ORM\Column(length: 255)]
     private ?string $type = null;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Player $winner = null;
+
     public function __construct()
     {
         $this->players = new ArrayCollection();
+    }
+
+    #[ORM\PrePersist]
+    public function setCreatedAtValue()
+    {
+        $this->createdAt = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -96,6 +106,18 @@ class Tournament
     public function setType(string $type): static
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getWinner(): ?Player
+    {
+        return $this->winner;
+    }
+
+    public function setWinner(?Player $winner): static
+    {
+        $this->winner = $winner;
 
         return $this;
     }

@@ -19,7 +19,8 @@ class TournamentRepository extends ServiceEntityRepository
 
     public function save(Tournament $tournament): void
     {
-        
+        $this->getEntityManager()->persist($tournament);
+        $this->getEntityManager()->flush();
     }
 
 //    /**
