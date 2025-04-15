@@ -22,7 +22,7 @@ final class IndexController extends AbstractController
     {
         $winner = $this->service->startGame($tournamentRequestDTO);
         return $this->json([
-            'message' => $winner,
+            'winner' => $winner,
         ]);
     }
 }
