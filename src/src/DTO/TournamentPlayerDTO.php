@@ -29,4 +29,29 @@ class TournamentPlayerDTO
     {
         
     }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getHability(): ?int
+    {
+        return $this->hability;
+    }
+
+    public function getStrenght(): ?int
+    {
+        return $this->strenght;
+    }
+
+    public function getTravelSpeed(): ?int
+    {
+        return $this->travelSpeed;
+    }
+
+    public function getReactionTime(): ?int
+    {
+        return $this->reactionTime;
+    }
 }

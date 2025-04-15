@@ -21,4 +21,14 @@ class TournamentRequestDTO
     {
         
     }
+
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    public function getPlayers(): array
+    {
+        return $this->players;
+    }
 }
