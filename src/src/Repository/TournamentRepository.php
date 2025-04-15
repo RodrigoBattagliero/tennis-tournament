@@ -16,6 +16,12 @@ class TournamentRepository extends ServiceEntityRepository
         parent::__construct($registry, Tournament::class);
     }
 
+
+    public function save(Tournament $tournament): void
+    {
+        
+    }
+
 //    /**
 //     * @return Tournament[] Returns an array of Tournament objects
 //     */
