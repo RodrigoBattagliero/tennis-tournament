@@ -6,6 +6,7 @@ use App\Repository\TournamentRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use OpenApi\Attributes as OA;
 
 #[ORM\Entity(repositoryClass: TournamentRepository::class)]
 #[ORM\HasLifecycleCallbacks]
@@ -40,7 +41,7 @@ class Tournament
     }
 
     #[ORM\PrePersist]
-    public function setCreatedAtValue()
+    public function createdAtValue()
     {
         $this->createdAt = new \DateTimeImmutable();
     }
