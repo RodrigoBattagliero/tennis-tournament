@@ -3,11 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Tournament;
-use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-
-use function PHPSTORM_META\type;
 
 /**
  * @extends ServiceEntityRepository<Tournament>

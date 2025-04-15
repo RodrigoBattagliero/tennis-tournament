@@ -3,11 +3,9 @@
 namespace App\Controller;
 
 use App\Service\GameService;
-use App\Dto\TournamentRequest;
 use App\DTO\TournamentRequestDTO;
 use App\DTO\TournamentSearchRequestDTO;
 use App\Service\TournamentSearchService;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Attribute\MapQueryString;
