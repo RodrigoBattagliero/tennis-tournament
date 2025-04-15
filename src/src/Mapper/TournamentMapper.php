@@ -2,8 +2,10 @@
 
 namespace App\Mapper;
 
-use App\ValueObject\Tournament;
+use App\ValueObject\Tournament as ValueObjectTournament;
 use App\DTO\TournamentRequestDTO;
+use App\Entity\Player;
+use App\Entity\Tournament as EntityTournament;
 
 class TournamentMapper
 {
@@ -12,9 +14,9 @@ class TournamentMapper
         private readonly PlayerMapper $playerMapper
     ) { }
 
-    public function fromDtoToValueObject(TournamentRequestDTO $tournamentDto): Tournament
+    public function fromDtoToValueObject(TournamentRequestDTO $tournamentDto): ValueObjectTournament
     {
-        $tournament = new Tournament();
+        $tournament = new ValueObjectTournament();
         $tournament->setType($tournamentDto->getType());
         $tournament->setName('');
         foreach ($tournamentDto->getPlayers() as $playerDto) {
@@ -22,5 +24,19 @@ class TournamentMapper
         }
 
         return $tournament;
+    }
+
+    public function fromValueObjectToEntity(ValueObjectTournament $valueObjectTournament): EntityTournament
+    {
+        $entityTournament = new EntityTournament();
+        $entityTournament->setName($valueObjectTournament->getName());
+        $entityTournament->setWinner($valueObjectTournament->getWinner());
+        foreach ($valueObjectTournament->getPlayers() as $valueObjectPlayer) {
+            $entityTournament->addPlayer(
+                $this->playerMapper->fromValueObjectToEntity($valueObjectPlayer)
+            );
+        }
+        
+        return $entityTournament;
     }
 }
