@@ -30,16 +30,6 @@ class Player
     #[ORM\Column(nullable: true)]
     private ?int $reactionTime = null;
 
-    /**
-     * @var Collection<int, Tournament>
-     */
-    #[ORM\ManyToMany(targetEntity: Tournament::class, mappedBy: 'players')]
-    private Collection $tournaments;
-
-    public function __construct()
-    {
-        $this->tournaments = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -106,30 +96,4 @@ class Player
         return $this;
     }
 
-    /**
-     * @return Collection<int, Tournament>
-     */
-    public function getTournaments(): Collection
-    {
-        return $this->tournaments;
-    }
-
-    public function addTournament(Tournament $tournament): static
-    {
-        if (!$this->tournaments->contains($tournament)) {
-            $this->tournaments->add($tournament);
-            $tournament->addPlayer($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTournament(Tournament $tournament): static
-    {
-        if ($this->tournaments->removeElement($tournament)) {
-            $tournament->removePlayer($this);
-        }
-
-        return $this;
-    }
 }

@@ -58,9 +58,9 @@ class TournamentService
         return $stageWinner;
     }
 
-    function playGame(Player $player1, Player $player2): Player
+    function playGame(Player $playerA, Player $playerB): Player
     {
-        return $this->playStrategy->play($player1, $player2);
+        return $this->playStrategy->play($playerA, $playerB);
     }
 
 }

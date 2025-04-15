@@ -3,8 +3,11 @@
 namespace App\Repository;
 
 use App\Entity\Tournament;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+
+use function PHPSTORM_META\type;
 
 /**
  * @extends ServiceEntityRepository<Tournament>
@@ -21,6 +24,32 @@ class TournamentRepository extends ServiceEntityRepository
     {
         $this->getEntityManager()->persist($tournament);
         $this->getEntityManager()->flush();
+    }
+
+    public function search(?string $type, ?\DateTimeImmutable $date, ?string $winnerName): array
+    {
+        $qb = $this->createQueryBuilder('t');
+
+        if ($type) {
+            $qb->andWhere('t.type = :type')
+                ->setParameter('type', $type)
+            ;
+        }
+
+        if ($date) {
+            $qb->andWhere('t.createdAt >= :date')
+                ->setParameter('date', $date)
+            ;
+        }
+
+        if ($winnerName) {
+            $qb->leftJoin('t.winner', 'w')
+                ->andWhere('w.name LIKE :winnerName')
+                ->setParameter('winnerName', '%'.$winnerName.'%')
+            ;
+        }
+
+        return $qb->getQuery()->getResult();
     }
 
 //    /**

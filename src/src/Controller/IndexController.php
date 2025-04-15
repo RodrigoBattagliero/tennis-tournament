@@ -2,23 +2,36 @@
 
 namespace App\Controller;
 
+use App\Service\GameService;
 use App\Dto\TournamentRequest;
 use App\DTO\TournamentRequestDTO;
-use App\Service\GameService;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use App\DTO\TournamentSearchRequestDTO;
+use App\Service\TournamentSearchService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpKernel\Attribute\MapQueryString;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class IndexController extends AbstractController
 {
     public function __construct(
-        private GameService $service
+        private GameService $service,
+        private TournamentSearchService $tournamentSearchService
     ) { }
 
-    #[Route('/', name: 'app_index', methods:['POST'])]
-    public function index(#[MapRequestPayload] TournamentRequestDTO $tournamentRequestDTO): JsonResponse
+    #[Route('/', name: 'app_search', methods:['GET'])]
+    public function search(#[MapQueryString] TournamentSearchRequestDTO $tournamentSearchRequestDTO): JsonResponse
+    {
+        $data = $this->tournamentSearchService->search($tournamentSearchRequestDTO);
+        return $this->json([
+            'result' => $data,
+        ]);
+    }
+
+    #[Route('/', name: 'app_start_game', methods:['POST'])]
+    public function game(#[MapRequestPayload] TournamentRequestDTO $tournamentRequestDTO): JsonResponse
     {
         $winner = $this->service->startGame($tournamentRequestDTO);
         return $this->json([
