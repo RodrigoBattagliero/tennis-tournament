@@ -2,29 +2,24 @@
 
 namespace App\Controller;
 
-use App\Service\GameService;
 use OpenApi\Attributes as OA;
-use App\DTO\TournamentRequestDTO;
 use App\DTO\TournamentSearchRequestDTO;
-use App\Entity\Player;
 use App\Entity\Tournament;
 use App\Service\TournamentSearchService;
 use Nelmio\ApiDocBundle\Attribute\Model;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Attribute\MapQueryString;
-use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-final class IndexController extends AbstractController
+final class SearchController extends AbstractController
 {
     public function __construct(
-        private GameService $service,
         private TournamentSearchService $tournamentSearchService
     ) { }
     
 
-    #[Route('/api', name: 'app_search', methods:['GET'])]
+    #[Route('/api/search', name: 'app_search', methods:['GET'])]
     #[OA\Parameter(
         name: 'type',
         in: 'query',
@@ -60,16 +55,4 @@ final class IndexController extends AbstractController
     }
 
 
-    #[Route('/api', name: 'app_start_game', methods:['POST'])]
-    #[OA\RequestBody()]
-    #[OA\Response(
-        response: 200,
-        description: 'Successful response',
-        content: new Model(type: Player::class)
-    )]
-    public function game(#[MapRequestPayload] TournamentRequestDTO $tournamentRequestDTO): JsonResponse
-    {
-        $tournament = $this->service->startGame($tournamentRequestDTO);
-        return $this->json($tournament->getWinner());
-    }
 }
