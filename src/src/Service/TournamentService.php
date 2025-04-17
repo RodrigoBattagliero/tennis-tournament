@@ -17,7 +17,7 @@ class TournamentService
         $this->playStrategy = $playStrategy;
     }
 
-    public function setWinner(Tournament $tournament)
+    public function setWinner(Tournament $tournament): void
     {
         $winner = $this->getWinner($tournament);
         $tournament->setWinner($winner);
