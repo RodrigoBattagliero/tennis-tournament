@@ -19,103 +19,106 @@
 
 # Usage
 
-# Testing 
-# Usage
-![desc](https://drive.google.com/file/d/1uUezLKWku8PNxtj6bEmDKCtzoZBVu5Fy/view?usp=sharing)
+## POST api/game-start
 
-## input json
-
+> Request: Json example
 ```json
 {
     "type": "M",
     "players": [
-        {"name": '', "hability": 0, "fuerza": 0, "velocidad_desplazamiento": 0, "tiempo_de_reaccion": 0},
-        {"name": '', "hability": 0, "fuerza": 0, "velocidad_desplazamiento": 0, "tiempo_de_reaccion": 0},
-        {"name": '', "hability": 0, "fuerza": 0, "velocidad_desplazamiento": 0, "tiempo_de_reaccion": 0},
-        {"name": '', "hability": 0, "fuerza": 0, "velocidad_desplazamiento": 0, "tiempo_de_reaccion": 0},
+        {"name": "Player 1", "hability": 75, "strenght": 57, "travelSpeed": 60, "reactionTime": 0},
+        {"name": "Player 2", "hability": 74, "strenght": 55, "travelSpeed": 55, "reactionTime": 0},
+        {"name": "Player 3", "hability": 20, "strenght": 10, "travelSpeed": 5, "reactionTime": 0},
+        {"name": "Player 4", "hability": 50, "strenght": 57, "travelSpeed": 50, "reactionTime": 0}
     ]
 }
 ```
 
+> Response: Json example
 ## output json
 ```json
 {
-    "winner": {
-        {"name": '', "hability": 0, "fuerza": 0, "velocidad_desplazamiento": 0, "tiempo_de_reaccion": 0}
-    }
+    "name": "Player 2",
+	"hability": 74,
+	"strenght": 55,
+	"travelSpeed": 55,
+	"reactionTime": 0,
+	"extraPoints": 86
 }
 ```
 
-```php
-
-// Entity / Domain
-class player {
-    # name
-    # hability
-    # fuerza
-    # velocidad_desplazamiento
-    # tiempo_de_reaccion
-}
-
-class Tournament 
-{
-    # name
-    # type
-    # winner: Player
-    # init_date
-    # finish_date
-}
-
-// Service / Application 
-class GameService {
-    // se puede mejorar con dto 
-    public function startGame(array $players, string $type)
-    {
-        # 1. el juego se divide en stages dependiendo de los jugadores
-        $stagesCount = getStages(count($players));
-        # Mezclo jugadores
-        # init stages - inicia el primer stage
-        $stages = ;
-        for (int $i = 0; $i < $stages; $i++) {
-            # encuentra el ganador
-            $winner = ;
-        }
-
-    }
-
-    function getStages($players)
-    {
-        return [
-            'total_stages' => 2
-        ];
-    }
-}
-
-// Controller / Presentation
-class IndexController {
-    public function startGame() {}
-    public function search() {}
-}
-
-// Repository / Infraestructure
-
-class Stage {
-    # 
-}
-
-class 
+## GET api/search
+> Example endpoint api/search?type=M
+> Example response 
+```json
+[
+	{
+		"type": "M",
+		"date": "2025-04-19T05:48:14+00:00",
+		"players": [
+			{
+				"name": "Player 1",
+				"hability": 75,
+				"strenght": 57,
+				"travelSpeed": 60,
+				"reactionTime": 0
+			},
+			{
+				"name": "Player 2",
+				"hability": 74,
+				"strenght": 55,
+				"travelSpeed": 55,
+				"reactionTime": 0
+			},
+			{
+				"name": "Player 3",
+				"hability": 20,
+				"strenght": 10,
+				"travelSpeed": 5,
+				"reactionTime": 0
+			},
+			{
+				"name": "Player 4",
+				"hability": 50,
+				"strenght": 57,
+				"travelSpeed": 50,
+				"reactionTime": 0
+			}
+		],
+		"winner": {
+			"name": "Player 2",
+			"hability": 74,
+			"strenght": 55,
+			"travelSpeed": 55,
+			"reactionTime": 0
+		}
+	}
+]
 
 ```
 
-01. agregar factor suerte * 
-02. guardar entity tournament *
-03. eliminar propiedades innecesarias *
-04. crear enpoint para consultar tournament *
-05. committear cambis *
-06. unit test *
-07. integral test *
-08. aws
-09. Strategies refactor. Agregar clase abstracta *
-10. swagger *
-11. Mejorar objetos en swagger
-12. mejorar readme
+
+# Testing
+Screenshot of the testing
+
+1. Manual POST api/start-game
+
+[Manual POST api/start-game](https://drive.google.com/file/d/1eCIC6oZkAAGzsqkAoEjJGEQbwVtwFTLR/view?usp=sharing)
+
+2. Check Database
+
+[Check Database](https://drive.google.com/file/d/1GJM88iQTRE92N6p33V-75bM1ACQPKH3Y/view?usp=sharing)
+
+3. Manual GET api/search
+
+[Manual GET api/search](https://drive.google.com/file/d/1333tJfxtcQNUS2iK7UEku_hHq-lPqlaa/view?usp=sharing)
+
+4. Manual Get api/search with params
+
+[Manual Get api/search with params 1](https://drive.google.com/file/d/12kY71w3k3TJNl5X9mFtsbaBhD1TXkde6/view?usp=sharing)
+
+[Manual Get api/search with params 2](https://drive.google.com/file/d/1mF-VjyCMOrbH51TBzkQj5xsDox87O9xu/view?usp=sharing)
+
+5. Unit test
+
+[Unit test](https://drive.google.com/file/d/1TTCsDdlhb5tEpv4wCgBTDrDvv9NayVDA/view?usp=sharing)

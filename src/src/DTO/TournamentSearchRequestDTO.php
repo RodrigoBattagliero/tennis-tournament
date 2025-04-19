@@ -9,7 +9,7 @@ class TournamentSearchRequestDTO
     public function __construct(
         #[Assert\Choice(['M', 'F', ''])]
         private readonly ?string $type,
-        private readonly ?\DateTimeImmutable $date,
+        private readonly ?\DateTimeImmutable $dateMin,
         private readonly ?string $winnerName
     ) { }
 
@@ -18,9 +18,9 @@ class TournamentSearchRequestDTO
         return $this->type;
     }
 
-    public function getDate(): ?\DateTimeImmutable
+    public function getDateMin(): ?\DateTimeImmutable
     {
-        return $this->date;
+        return $this->dateMin;
     }
 
     public function getWinnerName(): ?string

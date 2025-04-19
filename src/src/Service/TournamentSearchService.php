@@ -22,7 +22,7 @@ class TournamentSearchService
     {
         return $this->tournamentRepository->search(
             $tournamentSearchRequestDTO->getType(),
-            $tournamentSearchRequestDTO->getDate(),
+            $tournamentSearchRequestDTO->getDateMin(),
             $tournamentSearchRequestDTO->getWinnerName()
         );
     }

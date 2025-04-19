@@ -35,7 +35,7 @@ class TournamentRepository extends ServiceEntityRepository
      * @param ?\DateTimeImmutable $date date of the tournament
      * @param ?string $winnerName name of the winner
      */
-    public function search(?string $type, ?\DateTimeImmutable $date, ?string $winnerName): array
+    public function search(?string $type, ?\DateTimeImmutable $dateMin, ?string $winnerName): array
     {
         $qb = $this->createQueryBuilder('t');
 
@@ -45,9 +45,9 @@ class TournamentRepository extends ServiceEntityRepository
             ;
         }
 
-        if ($date) {
+        if ($dateMin) {
             $qb->andWhere('t.createdAt >= :date')
-                ->setParameter('date', $date)
+                ->setParameter('date', $dateMin)
             ;
         }
 

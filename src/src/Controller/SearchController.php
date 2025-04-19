@@ -32,7 +32,7 @@ final class SearchController extends AbstractController
         schema: new OA\Schema(type: 'string', enum: [TournamentType::FEMALE, TournamentType::MALE])
     )]
     #[OA\Parameter(
-        name: 'date',
+        name: 'dateMin',
         in: 'query',
         required: false,
         description: 'Date of the tournament',
