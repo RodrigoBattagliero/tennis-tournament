@@ -1,3 +1,26 @@
+# Setup
+
+1. Clone the project `git clone https://github.com/RodrigoBattagliero/tennis-tournament.git`
+2. Run `cd tennis-tournament`
+3. Run `cp src/.env src/.env.local`
+4. In `src/.env.local` set `APP_SECRET` and `DATABASE_URL`
+> Note: database conection data can be found in `docker-compose.yml`
+5. Run `docker compose up -d`
+6. Enter php container `docker compose exec php sh`
+7. Install dependencies `composer install`
+9. Run migrations `php bin/console doctrine:migrations:migrate`
+
+# Test
+1. Enter php container `docker compose exec php sh`
+2. Clone .env.test to .env.test.local and set `DATABASE_URL`
+2. Run `php bin/console --env=test doctrine:database:create`
+3. Run `php bin/console --env=test doctrine:schema:create`
+4. Run `php bin/phpunit`
+
+# Usage
+
+# Testing 
+
 ## input json
 
 ```json
@@ -81,3 +104,16 @@ class Stage {
 class 
 
 ```
+
+01. agregar factor suerte * 
+02. guardar entity tournament *
+03. eliminar propiedades innecesarias *
+04. crear enpoint para consultar tournament *
+05. committear cambis *
+06. unit test *
+07. integral test *
+08. aws
+09. Strategies refactor. Agregar clase abstracta *
+10. swagger *
+11. Mejorar objetos en swagger
+12. mejorar readme
