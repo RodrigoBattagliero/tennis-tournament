@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Service\GameService;
 use OpenApi\Attributes as OA;
 use App\DTO\TournamentRequestDTO;
+use App\DTO\TournamentResponseDTO;
 use App\DTO\WinnerResponseDTO;
 use App\Mapper\PlayerMapper;
 use Nelmio\ApiDocBundle\Attribute\Model;
@@ -24,7 +25,7 @@ final class GameStartController extends AbstractController
     
     
     #[Route('/api/start-game', name: 'app_start_game', methods:['POST'])]
-    #[OA\RequestBody()]
+    #[OA\RequestBody(content: new Model(type: TournamentResponseDTO::class))]
     #[OA\Response(
         response: ResponseCode::HTTP_OK,
         description: 'OK',
