@@ -9,7 +9,7 @@
 6. Enter php container `docker compose exec php sh`
 7. Install dependencies `composer install`
 9. Run migrations `php bin/console doctrine:migrations:migrate`
-> If you have errors related with database conection, you can inspect mariadb container and look for Gateway ip to use it as db host in .env.dev.local
+> If you have errors related with database connection, you can inspect mariadb container and look for Gateway ip to use it as db host in .env.dev.local
 
 # Test
 1. Enter php container `docker compose exec php sh`
