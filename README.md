@@ -18,7 +18,7 @@
 4. Run `php bin/phpunit`
 
 # Usage
-Once intalled, you can navigate try the application out and see the api doc via web in `http://localhost:8001/api/doc`
+Once intalled, you can try the application out and see the api doc via web in `http://localhost:8001/api/doc`
 
 Making api request
 
