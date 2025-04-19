@@ -2,8 +2,8 @@
 
 1. Clone the project `git clone https://github.com/RodrigoBattagliero/tennis-tournament.git`
 2. Run `cd tennis-tournament`
-3. Run `cp src/.env src/.env.local`
-4. In `src/.env.local` set `APP_SECRET` and `DATABASE_URL`
+3. Run `cp src/.env.dev src/.env.dev.local`
+4. In `src/.env.dev.local` `DATABASE_URL`
 > Note: database conection data can be found in `docker-compose.yml`
 5. Run `docker compose up -d`
 6. Enter php container `docker compose exec php sh`
