@@ -35,10 +35,9 @@
 ```
 
 > Response: Json example
-## output json
 ```json
 {
-    "name": "Player 2",
+    	"name": "Player 2",
 	"hability": 74,
 	"strenght": 55,
 	"travelSpeed": 55,
