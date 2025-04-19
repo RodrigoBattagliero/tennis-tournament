@@ -18,6 +18,12 @@
 4. Run `php bin/phpunit`
 
 # Usage
+Once intalled, you can navigate try the application out and see the api doc via web in `http://localhost:8001/api/doc`
+
+Making api request
+
+> POST http://localhost:8001/api/start-game
+> GET http://localhost:8001/api/search
 
 ## POST api/game-start
 
