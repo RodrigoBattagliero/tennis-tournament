@@ -10,11 +10,15 @@ class TournamentSearchService
 
     public function __construct(
         private readonly TournamentRepository $tournamentRepository
-    )
-    {
-        
-    }
-    public function search(TournamentSearchRequestDTO $tournamentSearchRequestDTO)
+    ) { }
+    
+    /**
+     * Search tournaments applying optional parameters
+     * 
+     * @param TournamentSearchRequestDTO $tournamentSearchRequestDTO
+     * @return array
+     */
+    public function search(TournamentSearchRequestDTO $tournamentSearchRequestDTO): array
     {
         return $this->tournamentRepository->search(
             $tournamentSearchRequestDTO->getType(),

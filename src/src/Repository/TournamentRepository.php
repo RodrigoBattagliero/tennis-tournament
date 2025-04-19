@@ -16,13 +16,25 @@ class TournamentRepository extends ServiceEntityRepository
         parent::__construct($registry, Tournament::class);
     }
 
-
+    /**
+     * Save the tournament enity
+     * 
+     * @param Tournament $tournament
+     * @return void
+     */
     public function save(Tournament $tournament): void
     {
         $this->getEntityManager()->persist($tournament);
         $this->getEntityManager()->flush();
     }
 
+    /**
+     * Search tournament 
+     * 
+     * @param ?string $type type of tournament
+     * @param ?\DateTimeImmutable $date date of the tournament
+     * @param ?string $winnerName name of the winner
+     */
     public function search(?string $type, ?\DateTimeImmutable $date, ?string $winnerName): array
     {
         $qb = $this->createQueryBuilder('t');

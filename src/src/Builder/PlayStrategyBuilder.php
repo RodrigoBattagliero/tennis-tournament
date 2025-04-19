@@ -10,6 +10,13 @@ use App\Strategy\PlayDefaultFemale;
 
 class PlayStrategyBuilder
 {
+
+    /**
+     * Determinate the PlayStrategy for the tournament
+     * 
+     * @param Tournament $tournament
+     * @return PlayInterface
+     */
     public function getPlayStrategy(Tournament $tournament): PlayInterface
     {
         $playStrategy = match ($tournament->getType()) {

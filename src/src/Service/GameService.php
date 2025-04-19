@@ -6,7 +6,11 @@ use App\Builder\PlayStrategyBuilder;
 use App\DTO\TournamentRequestDTO;
 use App\Mapper\TournamentMapper;
 use App\Repository\TournamentRepository;
+use App\ValueObject\Tournament;
 
+/**
+ * Game orquestrator
+ */
 class GameService
 {
 
@@ -16,8 +20,15 @@ class GameService
         private readonly PlayStrategyBuilder $playStrategyBuilder,
         private readonly TournamentRepository $tournamentRepository
     ) { }
+    
 
-    public function startGame(TournamentRequestDTO $tournamentRequestDTO)
+    /**
+     * Determinate winner for tournamanetDTO and store it.
+     * 
+     * @param TournamentRequestDTO $tournamentRequestDTO
+     * @return Tournament
+     */
+    public function startGame(TournamentRequestDTO $tournamentRequestDTO): Tournament
     {
         $tournament = $this->tournamentMapper->fromDtoToValueObject($tournamentRequestDTO);
 

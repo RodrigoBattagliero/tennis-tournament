@@ -12,17 +12,35 @@ class TournamentService
 {
     private readonly PlayInterface $playStrategy;
 
-    public function setPlayStrategy(PlayInterface $playStrategy)
+    /**
+     * Set the strategy used to deteminate a winner between two players
+     * 
+     * @param PlayInterface $playStrategy
+     * @return void
+     */
+    public function setPlayStrategy(PlayInterface $playStrategy): void
     {
         $this->playStrategy = $playStrategy;
     }
 
+    /**
+     * Sets the winner for the tournament
+     * 
+     * @param Tournament $tournament
+     * @return void
+     */
     public function setWinner(Tournament $tournament): void
     {
         $winner = $this->getWinner($tournament);
         $tournament->setWinner($winner);
     }
 
+    /**
+     * Return the winner for the tournament.
+     * 
+     * @param Tournament $tournament
+     * @return Player
+     */
     public function getWinner(Tournament $tournament): Player
     {
         $winner = null;
@@ -42,6 +60,14 @@ class TournamentService
         return $winner;
     }
 
+    /**
+     * Return a PlayerCollection that represents all the winners 
+     * for every math in this stage. 
+     * This means, the players (winners) who passed to the next stage
+     * 
+     * @param Stage $stage
+     * @return PlayerCollection
+     */
     public function getStageWinner(Stage $stage): PlayerCollection
     {
         $stageWinner = new PlayerCollection;
@@ -58,6 +84,13 @@ class TournamentService
         return $stageWinner;
     }
 
+    /**
+     * Apply playStrategy and return the winner
+     * 
+     * @param Player $playerA
+     * @param Player $playerB
+     * @return Player
+     */
     function playGame(Player $playerA, Player $playerB): Player
     {
         return $this->playStrategy->play($playerA, $playerB);

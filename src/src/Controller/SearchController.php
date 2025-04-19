@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Const\TournamentType;
+use App\DTO\TournamentResponseDTO;
 use OpenApi\Attributes as OA;
 use App\DTO\TournamentSearchRequestDTO;
 use App\Entity\Tournament;
+use App\Mapper\TournamentMapper;
 use App\Service\TournamentSearchService;
 use Nelmio\ApiDocBundle\Attribute\Model;
 use Symfony\Component\Routing\Attribute\Route;
@@ -15,7 +18,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 final class SearchController extends AbstractController
 {
     public function __construct(
-        private TournamentSearchService $tournamentSearchService
+        private readonly TournamentSearchService $tournamentSearchService,
+        private readonly TournamentMapper $tournamentMapper
     ) { }
     
 
@@ -25,7 +29,7 @@ final class SearchController extends AbstractController
         in: 'query',
         required: false,
         description: 'Type of tournament',
-        schema: new OA\Schema(type: 'string' )
+        schema: new OA\Schema(type: 'string', enum: [TournamentType::FEMALE, TournamentType::MALE])
     )]
     #[OA\Parameter(
         name: 'date',
@@ -43,15 +47,21 @@ final class SearchController extends AbstractController
     )]
     #[OA\Response(
         response: 200,
-        description: 'Successful response',
+        description: 'OK',
         content: new OA\JsonContent(
             type: 'array', 
-            items: new OA\Items(ref: new Model(type: Tournament::class))
+            items: new OA\Items(ref: new Model(type: TournamentResponseDTO::class))
         )
     )]
     public function search(#[MapQueryString] TournamentSearchRequestDTO $tournamentSearchRequestDTO): JsonResponse
     {
-        return $this->json($this->tournamentSearchService->search($tournamentSearchRequestDTO));
+        $data = $this->tournamentSearchService->search($tournamentSearchRequestDTO);
+
+        return $this->json(
+            array_map( function (Tournament $t) {
+                return $this->tournamentMapper->fromEntityToDTO($t);
+            }, $data)
+        );
     }
 
 
