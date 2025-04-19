@@ -13,7 +13,7 @@ final class GameStartControllerTest extends WebTestCase
         $client = static::createClient();
         $client->jsonRequest(method: 'POST', uri: 'api/start-game', parameters: $this->getArrayContent());
 
-        self::assertResponseStatusCodeSame(Response::HTTP_CREATED);
+        self::assertResponseStatusCodeSame(Response::HTTP_OK);
         $this->assertJson($client->getResponse()->getContent());
     }
 
