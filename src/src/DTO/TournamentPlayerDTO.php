@@ -10,19 +10,19 @@ class TournamentPlayerDTO
         #[Assert\NotBlank]
         private readonly string $name,
 
-        #[Assert\Positive]
+        #[Assert\PositiveOrZero()]
         #[Assert\Range(min: 0, max: 100)]
         private readonly int $hability,
 
-        #[Assert\Positive]
+        #[Assert\PositiveOrZero()]
         #[Assert\Range(min: 0, max: 100)]
         private readonly int $strenght,
 
-        #[Assert\Positive]
+        #[Assert\PositiveOrZero()]
         #[Assert\Range(min: 0, max: 100)]
         private readonly int $travelSpeed,
 
-        #[Assert\Positive]
+        #[Assert\PositiveOrZero()]
         #[Assert\Range(min: 0, max: 100)]
         private readonly int $reactionTime
     )
